@@ -10,42 +10,37 @@
 </template>
 
 <script>
+import OpenLayers from '../services/api';
+
 export default {
   name: 'Map',
   props: {
-    config: {
-      type: Object,
-      default: () => {},
-    },
     transitLine: {
       type: Number,
       default: () => null,
     },
   },
   mounted() {
-    this.$nextTick(() => {
-      this.loadMap();
-    });
+    this.$nextTick(() => this.loadChart());
   },
   methods: {
-    loadMap: (config) => {
-      const { ol } = window;
-      const inputs = config ?? {
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM(),
-          }),
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
-          zoom: 4,
-        }),
+    fetchUserLocation() {
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
       };
 
-      const map = new ol.Map(inputs);
-
-      return map;
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, options);
+      });
+    },
+    loadChart() {
+      this.fetchUserLocation()
+        .then((location) => {
+          const map = new OpenLayers(location.coords, 'map');
+          map.load();
+        });
     },
   },
 };
