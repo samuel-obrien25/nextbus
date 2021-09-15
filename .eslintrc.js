@@ -15,8 +15,10 @@ module.exports = {
   },
 
   rules: {
+    "vue/html-quotes": [ "error", "single", { "avoidEscape": false } ],
     'no-console': 'off',
     'no-debugger': 'off',
+    "quotes": [2, "single", { "avoidEscape": true, "allowTemplateLiterals": true }]
   },
 
   overrides: [
@@ -30,9 +32,4 @@ module.exports = {
       },
     },
   ],
-
-  'extends': [
-    'plugin:vue/recommended',
-    '@vue/airbnb'
-  ]
 };

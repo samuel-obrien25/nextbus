@@ -1,0 +1,1 @@
+export const MAPBOX_URL = 'https://api.mapbox.com/v4/';
