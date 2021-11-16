@@ -1,15 +1,29 @@
-import { MAPBOX_URL } from "../constants/API";
-
-export class MapBox {
-  constructor(inputs){
-    this.inputs = inputs;
+export default class OpenLayers {
+  constructor(userLocation, selector) {
+    this.selector = selector;
+    this.userLocation = userLocation;
   }
 
-  *get(inputs){
-    // {tileset_id}/{zoom}/{x}/{y}.{format}
+  load() {
+    const { ol } = window;
+    const userLocationLat = this.userLocation.latitude || null;
+    const userLocationLon = this.userLocation.longitude || null;
 
-    const BaseURL = MAPBOX_URL;
+    const inputs = {
+      target: this.selector,
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM(),
+        }),
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([userLocationLon, userLocationLat]),
+        zoom: 16,
+      }),
+    };
 
+    const map = new ol.Map(inputs);
 
+    return map;
   }
 }

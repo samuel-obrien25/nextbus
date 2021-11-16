@@ -18,7 +18,8 @@ module.exports = {
     "vue/html-quotes": [ "error", "single", { "avoidEscape": false } ],
     'no-console': 'off',
     'no-debugger': 'off',
-    "quotes": [2, "single", { "avoidEscape": true, "allowTemplateLiterals": true }]
+    "quotes": [2, "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "max-len": ["error", { "code": 80 }],
   },
 
   overrides: [

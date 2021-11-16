@@ -1,5 +1,6 @@
 <template>
-  <div class='home'>
+  <div class='main'>
+    <RouteDropdown />
     <Map />
   </div>
 </template>
@@ -14,3 +15,6 @@ export default {
   },
 };
 </script>
+
+<style lang="sass" scoped>
+</style>
